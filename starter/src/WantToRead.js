@@ -1,6 +1,6 @@
 import ListBooks from "./ListBooks";
 
-const WantToRead = ({ booksData }) => {
+const WantToRead = ({ booksData, onUpdateBooksData }) => {
   const displayData = booksData.filter(
     (dataEntry) => dataEntry.shelf === "wantToRead"
   );
@@ -9,7 +9,10 @@ const WantToRead = ({ booksData }) => {
     <div className="bookshelf">
       <h2 className="bookshelf-title">Want to Read</h2>
       <div className="bookshelf-books">
-        <ListBooks booksData={displayData} />
+        <ListBooks
+          booksData={displayData}
+          onUpdateBooksData={onUpdateBooksData}
+        />
       </div>
     </div>
   );

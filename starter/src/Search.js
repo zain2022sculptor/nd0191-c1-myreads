@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ListBooks from "./ListBooks";
 import * as BooksAPI from "./BooksAPI";
 
-const Search = ({ booksData, onsetShowPage }) => {
+const Search = ({ booksData, onsetShowPage, onUpdateBooksData }) => {
   const [query, setQuery] = useState("");
   const [searchResults, setSearhResutls] = useState([]);
 
@@ -24,13 +24,21 @@ const Search = ({ booksData, onsetShowPage }) => {
     };
   }, [query]);
 
-  console.log(searchResults);
-
-  const displayData = booksData.filter((dataEntry) =>
+  const datainShelf = booksData.filter((dataEntry) =>
     query === ""
       ? booksData
       : dataEntry.title.toLowerCase().includes(query.toLowerCase())
   );
+
+  let tempdata = [];
+  if (searchResults.length > 0) {
+    tempdata = searchResults.filter(
+      (searchResult) =>
+        !datainShelf.some((bookentry) => bookentry.id === searchResult.id)
+    );
+  }
+
+  const displayData = [...datainShelf, ...tempdata];
 
   return (
     <div className="search-books">
@@ -50,7 +58,12 @@ const Search = ({ booksData, onsetShowPage }) => {
         </div>
       </div>
       <div className="search-books-results">
-        {query.length > 0 && <ListBooks booksData={searchResults} />}
+        {query.length > 0 && (
+          <ListBooks
+            booksData={displayData}
+            onUpdateBooksData={onUpdateBooksData}
+          />
+        )}
       </div>
     </div>
   );

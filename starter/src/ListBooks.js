@@ -1,6 +1,6 @@
 import ShelfChanger from "./ShelfChanger";
 
-const ListBooks = ({ booksData }) => {
+const ListBooks = ({ booksData, onUpdateBooksData }) => {
   try {
     return (
       <ol className="books-grid">
@@ -17,7 +17,10 @@ const ListBooks = ({ booksData }) => {
                       backgroundImage: `url(${bookentry.imageLinks.thumbnail})`,
                     }}
                   ></div>
-                  <ShelfChanger />
+                  <ShelfChanger
+                    bookentry={bookentry}
+                    onUpdateBooksData={onUpdateBooksData}
+                  />
                 </div>
                 <div className="book-title">{bookentry.title}</div>
                 <div className="book-authors">{bookentry.authors}</div>
@@ -28,7 +31,12 @@ const ListBooks = ({ booksData }) => {
       </ol>
     );
   } catch (err) {
-    return <p>{console.log(err)}No data available</p>;
+    return (
+      <div>
+        {console.log(err)}
+        <p>Database error!, Please search for something else!</p>
+      </div>
+    );
   }
 };
 
