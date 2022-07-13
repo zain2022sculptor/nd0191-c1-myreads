@@ -6,5 +6,6 @@ In the MyReads Project I have created a bookshelf app that allows users to selec
 
 To get started with the app right away:
 
+- clone the repository into your local machine `git clone ${repo_link}`
 - install all project dependencies with `npm install`
 - start the development server with `npm start`
