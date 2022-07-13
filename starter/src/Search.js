@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import ListBooks from "./ListBooks";
+import { Link } from "react-router-dom";
 import * as BooksAPI from "./BooksAPI";
 
-const Search = ({ booksData, onsetShowPage, onUpdateBooksData }) => {
+const Search = ({ booksData, onUpdateBooksData }) => {
   const [query, setQuery] = useState("");
   const [searchResults, setSearhResutls] = useState([]);
 
@@ -19,9 +20,7 @@ const Search = ({ booksData, onsetShowPage, onUpdateBooksData }) => {
       searchBooks();
     }
 
-    return () => {
-      console.log("Cleanup called");
-    };
+    return () => {};
   }, [query]);
 
   const datainShelf = booksData.filter((dataEntry) =>
@@ -43,9 +42,9 @@ const Search = ({ booksData, onsetShowPage, onUpdateBooksData }) => {
   return (
     <div className="search-books">
       <div className="search-books-bar">
-        <a className="close-search" onClick={() => onsetShowPage()}>
+        <Link className="close-search" to="/">
           Close
-        </a>
+        </Link>
         <div className="search-books-input-wrapper">
           <input
             type="text"

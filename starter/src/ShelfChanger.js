@@ -1,17 +1,10 @@
-import { useState } from "react";
-
 const ShelfChanger = ({ bookentry, onUpdateBooksData }) => {
-  //const [shelf, setShelf] = useState("none");
-
   if (!bookentry.shelf) {
     bookentry.shelf = "none";
   }
 
-  console.log("Book entry shelf in shelf changer:", bookentry);
-
   const updateShelf = (event) => {
     onUpdateBooksData(bookentry, event.target.value);
-    //setShelf(event.target.value);
   };
 
   return (
