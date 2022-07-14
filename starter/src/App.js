@@ -1,12 +1,10 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import Search from "./Search";
-import CurrentlyReading from "./CurrentlyReading";
-import WantToRead from "./WantToRead";
-import Read from "./Read";
 import { Link, Route, Routes } from "react-router-dom";
 
 import * as BooksAPI from "./BooksAPI";
+import BookShelf from "./BookShelf";
 
 function App() {
   const [booksData, setBooksData] = useState([]);
@@ -61,17 +59,20 @@ function App() {
 
               <div className="list-books-content">
                 <div>
-                  <CurrentlyReading
+                  <BookShelf
                     booksData={booksData}
                     onUpdateBooksData={updateBooksData}
+                    results={"currentlyReading"}
                   />
-                  <WantToRead
+                  <BookShelf
                     booksData={booksData}
                     onUpdateBooksData={updateBooksData}
+                    results={"wantToRead"}
                   />
-                  <Read
+                  <BookShelf
                     booksData={booksData}
                     onUpdateBooksData={updateBooksData}
+                    results={"read"}
                   />
                 </div>
               </div>
